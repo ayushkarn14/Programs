@@ -1,0 +1,8 @@
+import java.io.*;
+//this program was made by ayush karn
+public class CopyComm {
+public static void main(String args[]) {
+//String b;
+ifhajifnejkfnqwekfnqwekfmqwkfqw
+whebfiuwebfiewubnowbnf
+//ayush

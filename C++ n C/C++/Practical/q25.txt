@@ -1,0 +1,21 @@
+details of student 1
+Roll no:1
+Name:ayush
+Class:10
+Year:2022
+Marks:97
+
+details of student 2
+Roll no:2
+Name:shivansh
+Class:10
+Year:2022
+Marks:98
+
+details of student 3
+Roll no:3
+Name:yash
+Class:10
+Year:2022
+Marks:98
+
