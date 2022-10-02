@@ -1,18 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    int t;
-    cin>>t;
-    for(int i=0;i<t;i++){
-    long long n, k;
-    cin>>n>>k;
-    vector<long long> a(n);
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
-    sort(a.begin(),a.end());
-    cout<<(a[min(k, n-1)])<<endl;
-    }
- return 0;
+template <typename T>
+int bin_search(T *arr, int f, int l, T x)
+{
+    if (f > l)
+        return -1;
+    int mid = (f + l) / 2;
+    if (arr[mid] == x)
+        return mid;
+    else if (arr[mid] > x)
+        return bin_search(arr, f, mid - 1, x);
+    else
+        return bin_search(arr, mid + 1, l, x);
 }
-//4 1 2 3 10 1 2 3 5.....k=3
+int main()
+{
+    float arr[] = {1.2, 2.3, 3.4, 4.5};
+    float x = 4.5;
+    cout << bin_search<float>(arr, 0, 3, x);
+}

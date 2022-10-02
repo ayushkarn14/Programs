@@ -18,6 +18,7 @@ public class AnB extends JFrame implements ActionListener {
     setLayout(new FlowLayout());
     b1.addActionListener(this);
     b2.addActionListener(this);
+    add(new painting());
   }
 
   public void actionPerformed(ActionEvent ae) {
@@ -32,11 +33,21 @@ public class AnB extends JFrame implements ActionListener {
     }
   }
 
-  public void paint(Graphics g) {
-    g.drawString(str, 100, 100);
-  }
-
   public static void main(String args[]) {
-    AnB ob = new AnB();
-  }
-}
+    // AnB ob = new AnB();
+    SwingUtilities.invokeLater(new Runnable()
+      {public void run(){
+        new AnB();
+      }
+    });
+  }}
+  class painting extends JPanel
+  {
+    painting(){
+      setBorder(BorderFactory.createLineBorder(Color.red,3));
+    }
+    protected void paintComponent(Graphics g){
+      super.paintComponent(g);
+      g.drawString("hello", 200, 100);
+    }
+  } 
