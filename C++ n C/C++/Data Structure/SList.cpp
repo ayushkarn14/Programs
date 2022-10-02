@@ -163,6 +163,10 @@ public:
             temp = temp->next;
         }
     }
+    void concat(SList ob)
+    {
+        this->tail->next = ob.head;
+    }
 };
 int main()
 {
@@ -175,20 +179,30 @@ int main()
         list.insert_at_tail(4);
         list.insert_at_tail(4);
         list.insert_at_tail(5);
-        list.insert_at(0, 3);
-        list.delete_front();
-        list.delete_back();
+
+        SList list1;
+        list1.insert_at_head(11);
+        list1.insert_at_head(21);
+        list1.insert_at_tail(41);
+        list1.insert_at_tail(41);
+        list1.insert_at_tail(51);
+
+        list.concat(list1);
         list.display();
-        cout << endl;
-        list.delete_at(2);
-        list.delete_x(4);
-        list.display();
-        cout << endl;
-        if (list.search(3) != NULL)
-            cout << "found" << endl;
-        else
-            cout << "not found " << endl;
-        cout << list.tail->d << " ";
+        // list.insert_at(0, 3);
+        // list.delete_front();
+        // list.delete_back();
+        // list.display();
+        // cout << endl;
+        // list.delete_at(2);
+        // list.delete_x(4);
+        // list.display();
+        // cout << endl;
+        // if (list.search(3) != NULL)
+        //     cout << "found" << endl;
+        // else
+        //     cout << "not found " << endl;
+        // cout << list.tail->d << " ";
     }
     catch (char const *msg)
     {

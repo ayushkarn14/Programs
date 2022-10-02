@@ -79,6 +79,7 @@ int main()
         list.insert(51);
         list.display();
         cout << endl;
+
         Sorted list1;
         list1.insert(5);
         list1.insert(14);
@@ -88,10 +89,10 @@ int main()
         list1.insert(151);
         list1.display();
 
-        cout << endl;
+        // cout << endl;
 
-        list.merge(list1);
-        list.display();
+        // list.merge(list1);
+        // list.display();
     }
     catch (char const *msg)
     {
