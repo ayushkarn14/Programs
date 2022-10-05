@@ -168,44 +168,44 @@ public:
         this->tail->next = ob.head;
     }
 };
-int main()
-{
-    try
-    {
+// int main()
+// {
+//     try
+//     {
 
-        SList list;
-        list.insert_at_head(1);
-        list.insert_at_head(2);
-        list.insert_at_tail(4);
-        list.insert_at_tail(4);
-        list.insert_at_tail(5);
+//         SList list;
+//         list.insert_at_head(1);
+//         list.insert_at_head(2);
+//         list.insert_at_tail(4);
+//         list.insert_at_tail(4);
+//         list.insert_at_tail(5);
 
-        SList list1;
-        list1.insert_at_head(11);
-        list1.insert_at_head(21);
-        list1.insert_at_tail(41);
-        list1.insert_at_tail(41);
-        list1.insert_at_tail(51);
+//         SList list1;
+//         list1.insert_at_head(11);
+//         list1.insert_at_head(21);
+//         list1.insert_at_tail(41);
+//         list1.insert_at_tail(41);
+//         list1.insert_at_tail(51);
 
-        list.concat(list1);
-        list.display();
-        // list.insert_at(0, 3);
-        // list.delete_front();
-        // list.delete_back();
-        // list.display();
-        // cout << endl;
-        // list.delete_at(2);
-        // list.delete_x(4);
-        // list.display();
-        // cout << endl;
-        // if (list.search(3) != NULL)
-        //     cout << "found" << endl;
-        // else
-        //     cout << "not found " << endl;
-        // cout << list.tail->d << " ";
-    }
-    catch (char const *msg)
-    {
-        cout << msg << endl;
-    }
-}
+//         list.concat(list1);
+//         list.display();
+//         // list.insert_at(0, 3);
+//         // list.delete_front();
+//         // list.delete_back();
+//         // list.display();
+//         // cout << endl;
+//         // list.delete_at(2);
+//         // list.delete_x(4);
+//         // list.display();
+//         // cout << endl;
+//         // if (list.search(3) != NULL)
+//         //     cout << "found" << endl;
+//         // else
+//         //     cout << "not found " << endl;
+//         // cout << list.tail->d << " ";
+//     }
+//     catch (char const *msg)
+//     {
+//         cout << msg << endl;
+//     }
+// }

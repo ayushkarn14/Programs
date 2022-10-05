@@ -89,10 +89,10 @@ int main()
         list1.insert(151);
         list1.display();
 
-        // cout << endl;
+        cout << endl;
 
-        // list.merge(list1);
-        // list.display();
+        list.merge(list1);
+        list.display();
     }
     catch (char const *msg)
     {

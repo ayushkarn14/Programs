@@ -42,14 +42,36 @@ public:
         }
         return sum / c;
     }
+    bool isempty()
+    {
+        if (header->next == trailer)
+            return true;
+        return false;
+    }
+    long get_tail()
+    {
+        if (isempty())
+            throw "Empty List";
+        return (long)(trailer->prev->d);
+    }
     void display()
     {
+        // cout << "displaying:\n";
         DNode *temp = header->next;
         while (temp->next != NULL)
         {
             cout << temp->d << " ";
             temp = temp->next;
         }
+    }
+    void delete_back()
+    {
+        if (isempty())
+            throw "List is empty";
+        DNode *to_delete = trailer->prev;
+        trailer->prev->prev->next = trailer;
+        trailer->prev = trailer->prev->prev;
+        delete to_delete;
     }
     void concat(DList ob)
     {
@@ -60,11 +82,12 @@ public:
         delete temp;
     }
 };
-int main()
-{
-    DList l1;
-    l1.insert_at_tail(200);
-    l1.insert_at_tail(100);
-    cout << l1.average();
-    l1.display();
-}
+// int main()
+// {
+//     DList l1;
+//     l1.insert_at_tail(200);
+//     l1.insert_at_tail(100);
+//     l1.insert_at_tail(300);
+//     l1.delete_back();
+//     l1.display();
+// }
