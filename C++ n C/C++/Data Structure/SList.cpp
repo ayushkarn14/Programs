@@ -61,7 +61,7 @@ public:
             c++;
         }
         if (temp == NULL)
-            throw "Invalid Index 1";
+            throw "Invalid Index";
         else
         {
             if (temp->next == NULL)
@@ -114,9 +114,9 @@ public:
             throw "Invalid Index";
         if (temp->next->next == NULL)
             tail = temp;
-        SNode *curr = temp->next;
-        temp->next = curr->next;
-        delete curr;
+        SNode *to_delete = temp->next;
+        temp->next = to_delete->next;
+        delete to_delete;
     }
     void delete_x(int value)
     {
@@ -179,16 +179,18 @@ public:
 //         list.insert_at_tail(4);
 //         list.insert_at_tail(4);
 //         list.insert_at_tail(5);
-
-//         SList list1;
-//         list1.insert_at_head(11);
-//         list1.insert_at_head(21);
-//         list1.insert_at_tail(41);
-//         list1.insert_at_tail(41);
-//         list1.insert_at_tail(51);
-
-//         list.concat(list1);
 //         list.display();
+//         cout << endl;
+//         list.delete_at(1);
+//         list.display();
+//         // SList list1;
+//         // list1.insert_at_head(11);
+//         // list1.insert_at_head(21);
+//         // list1.insert_at_tail(41);
+//         // list1.insert_at_tail(41);
+//         // list1.insert_at_tail(51);
+
+//         // list.concat(list1);
 //         // list.insert_at(0, 3);
 //         // list.delete_front();
 //         // list.delete_back();

@@ -7,7 +7,6 @@ void ins_sort(int *arr, int s)
     for (int i = 1; i < s; i++)
     {
         j = i - 1;
-        int c = 0;
         key = arr[i];
         while (j >= 0 && key < arr[j])
         {
@@ -16,7 +15,7 @@ void ins_sort(int *arr, int s)
         }
         arr[j + 1] = key;
     }
-    cout<<"Sorted array:";
+    cout << "Sorted array:";
     for (int i = 0; i < s; i++)
     {
         cout << arr[i] << " ";
@@ -29,8 +28,8 @@ int main()
     int s;
     cin >> s;
     int arr[s];
-    cout<<"Enter the values : "<<endl;
+    cout << "Enter the values : " << endl;
     for (int i = 0; i < s; i++)
-        cin>>arr[i];
-    ins_sort(arr,s);
+        cin >> arr[i];
+    ins_sort(arr, s);
 }
