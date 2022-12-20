@@ -1,6 +1,6 @@
-#include <bits/stdc++.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <bits/stdc++.h>
 #define BUF_SIZE 8192
 int main(int argc, char *argv[])
 {
@@ -10,14 +10,15 @@ int main(int argc, char *argv[])
 
     if (argc != 3)
         exit(-1);
-    fd1 = open(argv[1], O_RDONLY);
 
+    fd1 = open(argv[1], O_RDONLY);
     if (fd1 < 0)
         exit(-1);
 
     fd2 = open(argv[2], O_CREAT | O_WRONLY, S_IRUSR);
     if (fd2 < 0)
         exit(-1);
+
     while (n = read(fd1, buf, BUF_SIZE))
         write(fd2, buf, n);
     close(fd1);

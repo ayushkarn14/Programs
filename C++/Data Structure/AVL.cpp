@@ -177,7 +177,7 @@ public:
                 {
                     *root = *temp;
                 }
-                free(temp);
+                delete temp;
             }
             else
             {
@@ -205,7 +205,7 @@ public:
             return right_rotate(root);
 
         // RR
-        if (balance < -11 && getBalance(root->right) <= 0)
+        if (balance < -1 && getBalance(root->right) <= 0)
             return left_rotate(root);
 
         // LR

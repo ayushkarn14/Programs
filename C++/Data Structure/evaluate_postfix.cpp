@@ -46,13 +46,6 @@ string infixtopostfix(string s)
                 st.push(c);
             }
         }
-        // stack<char> t = st;
-        // while (!t.empty())
-        // {
-        //     cout << t.top();
-        //     t.pop();
-        // }
-        // cout << endl;
     }
     while (!st.empty())
     {

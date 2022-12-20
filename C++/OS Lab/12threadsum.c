@@ -2,18 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int sum, sum1, sum2;
+int sum;
 void *runner(void *param);
 
 int main(int argc, char *argv[])
 {
 
-    int arr[] = {1, 2, 3, 4, 100, 200, 300, 400};
-    pthread_t tid1;
-    pthread_t tid2;
+    pthread_t tid;
 
-    pthread_attr_t attr1;
-    pthread_attr_t attr2;
+    pthread_attr_t attr;
     if (argc != 2)
     {
         fprintf(stderr, "usage: a.out<integervalue>\n");
@@ -24,14 +21,11 @@ int main(int argc, char *argv[])
         fprintf(stderr, "%d must be >= 0\n", atoi(argv[1]));
         return -1;
     }
-    pthread_attr_init(&attr1);
-    pthread_attr_init(&attr2);
+    pthread_attr_init(&attr);
 
-    pthread_create(&tid1, &attr1, runner, argv[1]);
-    pthread_create(&tid2, &attr2, runner, argv[1]);
+    pthread_create(&tid, &attr, runner, argv[1]);
 
-    pthread_join(tid1, NULL);
-    pthread_join(tid2, NULL);
+    pthread_join(tid, NULL);
     printf("SUM: %d\n", sum);
 
     return 0;
