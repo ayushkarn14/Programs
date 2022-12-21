@@ -74,8 +74,8 @@ public:
     }
     void del(int n)
     {
-        Node *tr = NULL;
-        Node *t = root;
+        Node *tr = NULL; // parent of t
+        Node *t = root;  // node to delete
         while (t->key != n)
         {
             tr = t;
@@ -87,7 +87,7 @@ public:
         if (t->left == NULL)
         {
             if (t->right == NULL)
-            {
+            { // no child
                 if (tr->right == t)
                     tr->right = NULL;
                 else
@@ -96,11 +96,11 @@ public:
             else
                 tr->right = t->right;
         }
-        else
+        else // left exists
         {
             if (t->right == NULL)
                 tr->right = t->left;
-            else
+            else // both exists
             {
                 Node *tt = t->left;
                 Node *ttr = t;
@@ -113,6 +113,7 @@ public:
                 ttr->right = NULL;
             }
         }
+        delete t;
     }
     void replace(int x, int y)
     {
@@ -143,8 +144,8 @@ public:
         if (node == NULL)
             return;
         cout << node->key << " ";
-        disp_inorder(node->left);
-        disp_inorder(node->right);
+        disp_preorder(node->left);
+        disp_preorder(node->right);
     }
     void display_postorder()
     {
