@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <stack>
 using namespace std;
 class Node
 {
@@ -120,6 +121,79 @@ public:
         del(x);
         insert(y);
     }
+    void display_inorder_iterative()
+    {
+        Node *t = root;
+        stack<Node *> st;
+        while (true)
+        {
+            if (t != NULL)
+            {
+                st.push(t);
+                t = t->left;
+            }
+            else
+            {
+                if (st.empty())
+                    break;
+                cout << st.top()->key << " ";
+                t = st.top()->right;
+                st.pop();
+            }
+        }
+    }
+    void display_preorder_iterative() // root left right
+    {
+        stack<Node *> st;
+        Node *t = root;
+        if (t != NULL)
+        {
+            st.push(t);
+            while (!st.empty())
+            {
+                cout << t->key << " ";
+                st.pop();
+                if (t->right != NULL)
+                    st.push(t->right);
+                if (t->left != NULL)
+                    st.push(t->left);
+                t = st.top();
+            }
+        }
+    }
+    void display_postorder_iterative()
+    {
+        Node *temp;
+        Node *curr = root;
+        stack<Node *> st;
+        while (curr != NULL || !st.empty())
+        {
+            if (curr != NULL)
+            {
+                st.push(curr);
+                curr = curr->left;
+            }
+            else
+            {
+                temp = st.top()->right;
+                if (temp != NULL)
+                    curr = temp;
+                else
+                {
+                    temp = st.top();
+                    cout << temp->key << " ";
+                    st.pop();
+
+                    while (!st.empty() && temp == st.top()->right)
+                    {
+                        temp = st.top();
+                        cout << temp->key << " ";
+                        st.pop();
+                    }
+                }
+            }
+        }
+    }
     void display_inorder()
     {
         disp_inorder(root);
@@ -149,7 +223,7 @@ public:
     }
     void display_postorder()
     {
-        disp_preorder(root);
+        disp_postorder(root);
         cout << endl;
     }
     void disp_postorder(Node *node)
@@ -203,7 +277,11 @@ int main()
     t.insert(18);
     t.insert(12);
     // t.display_inorder();
-    t.level_traversal();
+    // t.display_postorder();
+    t.display_preorder();
+    t.display_preorder_iterative();
+    // t.display_inorder_iterative();
+    // t.level_traversal();
     // t.replace(9, 100);
     // cout << t.max();
     // t.display_inorder();
