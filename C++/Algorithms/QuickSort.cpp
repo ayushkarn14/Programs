@@ -70,6 +70,10 @@ void display(int *a, int size)
 
 int main()
 {
+    cout << "Enter number of values: ";
+    int n;
+    cin >> n;
+    
     int arr[] = {8, 4, 2, 9, 12, 1, 100};
     // QuickSort(arr, 0, 6);
     QuickSortIt(arr, 0, 6);

@@ -9,6 +9,12 @@ void mergeSort(int *a, int f, int l)
     mergeSort(a, mid + 1, l);
     merge(a, f, mid, l);
 }
-void merge(int a *, int f, ) int main()
+void merge(int *a, int f, int mid, int l)
+{
+    int *left;
+    int *right;
+    for (int i = 0; i <)
+}
+int main()
 {
 }
