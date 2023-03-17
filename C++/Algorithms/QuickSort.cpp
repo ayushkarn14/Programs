@@ -1,3 +1,4 @@
+// not done
 #include <iostream>
 using namespace std;
 int Hoare_P(int *a, int f, int l)
@@ -73,9 +74,9 @@ int main()
     cout << "Enter number of values: ";
     int n;
     cin >> n;
-    
-    int arr[] = {8, 4, 2, 9, 12, 1, 100};
-    // QuickSort(arr, 0, 6);
-    QuickSortIt(arr, 0, 6);
+
+    int arr[] = {12, 4, 22, 57, 4, 2, 0};
+    QuickSort(arr, 0, 6);
+    // QuickSortIt(arr, 0, 6);
     display(arr, 6);
 }
