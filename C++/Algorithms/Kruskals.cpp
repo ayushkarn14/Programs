@@ -1,25 +1,11 @@
 #include <bits/stdc++.h>
 #include "DisjointSet.cpp"
 using namespace std;
-int spanningTree(int n, vector<vector<int>> edges[])
+vector<pair<int, pair<int, int>>> spanningTree(int n, vector<pair<int, pair<int, int>>> adj)
 {
-    // code here
-    // making adjacency list
-    vector<pair<int, pair<int, int>>> adj;
-    //          w          u    v
-    for (int i = 0; i < n; i++)
-    {
-        for (auto it : edges[i])
-        {
-            int v = it[0];
-            int w = it[1];
-            int u = i;
-            adj.push_back({w, {u, v}});
-        }
-    }
     Disjoint ds(n);
     sort(adj.begin(), adj.end());
-    int mstWt = 0;
+    vector<pair<int, pair<int, int>>> result;
     for (auto it : adj)
     {
         int w = it.first;
@@ -28,13 +14,34 @@ int spanningTree(int n, vector<vector<int>> edges[])
 
         if (ds.findUParent(u) != ds.findUParent(v))
         {
-            mstWt += w;
+            result.push_back({w, {u, v}});
             ds.UnionByRank(u, v);
         }
     }
-    return mstWt;
-    // the parent vector in Disjoint class will contain the parent of each nodes, if needed, print it;
+    return result;
 }
 int main()
 {
+    cout << "E: ";
+    int e;
+    cin >> e;
+    cout << "V: ";
+    int n;
+    cin >> n;
+    int u, v, w;
+    vector<pair<int, pair<int, int>>> adj; // adjacency list
+    for (int i = 0; i < e; i++)
+    {
+        cin >> u >> v >> w;
+        adj.push_back({w, {u, v}});
+    }
+    vector<pair<int, pair<int, int>>> ans = spanningTree(n, adj);
+    int weight = 0;
+    cout << "Edges in the min spanning tree: \n";
+    for (auto it : ans)
+    {
+        weight += it.first;
+        cout << it.second.first << " " << it.second.second << " " << it.first << endl;
+    }
+    cout << "Sum of weights : " << weight;
 }

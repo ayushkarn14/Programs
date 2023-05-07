@@ -17,13 +17,16 @@ int Hoare_P(int *a, int f, int l)
             i++;
         } while (a[i] < x);
         if (i < j)
+        {
             swap(a[i], a[j]);
+        }
         else
         {
-            return i;
+            return j;
         }
     }
 }
+
 int Lomuto_P(int *a, int f, int l)
 {
     int pivot = a[l];
@@ -42,12 +45,13 @@ int Lomuto_P(int *a, int f, int l)
 
 void QuickSort(int *a, int f, int l)
 {
-    if (f >= l)
-        return;
-    int p = Lomuto_P(a, f, l);
-    // int p = Hoare_P(a, f, l);
-    QuickSort(a, f, p - 1);
-    QuickSort(a, p + 1, l);
+    if (f < l)
+    {
+        int p = Lomuto_P(a, f, l);
+        // int p = Hoare_P(a, f, l);
+        QuickSort(a, f, p - 1);
+        QuickSort(a, p + 1, l);
+    }
 }
 void QuickSortIt(int *a, int f, int l)
 {
@@ -78,5 +82,5 @@ int main()
     int arr[] = {12, 4, 22, 57, 4, 2, 0};
     QuickSort(arr, 0, 6);
     // QuickSortIt(arr, 0, 6);
-    display(arr, 6);
+    display(arr, 7);
 }

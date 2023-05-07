@@ -1,22 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, vector<pair<pair<int, int>, int>> &g)
+vector<pair<int, pair<int, int>>> calculatePrimsMST(int n, map<int, vector<pair<int, int>>> adj)
 {
-    // vector<pair<pair<node1, node2>, weight>>;
-
-    // making adjacency list
-    unordered_map<int, list<pair<int, int>>> adj;
-    for (int i = 0; i < g.size(); i++)
-    {
-        int u = g[i].first.first;
-        int v = g[i].first.second;
-        int w = g[i].second;
-
-        adj[u].push_back(make_pair(v, w));
-        adj[v].push_back(make_pair(u, w));
-    }
-
-    // initializations and making req. data structures
     vector<int> key(n + 1, INT_MAX);
     vector<bool> mst(n + 1, false);
     vector<int> parent(n + 1, -1);
@@ -44,18 +29,42 @@ vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, vector<pair<pair<int,
             int v = it.first;
             int w = it.second;
 
-            if (mst[v] == false && w < key[v])
+            if (!mst[v] && w < key[v])
             {
                 parent[v] = u;
                 key[v] = w;
             }
         }
     }
-    vector<pair<pair<int, int>, int>> result;
+    vector<pair<int, pair<int, int>>> result;
     for (int i = 2; i <= n; i++)
-        result.push_back(make_pair(make_pair(parent[i], i), key[i]));
+        // result.push_back(make_pair(make_pair(parent[i], i), key[i]));
+        result.push_back({key[i], {i, parent[i]}});
     return result;
 }
 int main()
 {
+    cout << "E: ";
+    int e;
+    cin >> e;
+    cout << "V: ";
+    int n;
+    cin >> n;
+    int u, v, w;
+    map<int, vector<pair<int, int>>> adj; // adjacency list
+    for (int i = 0; i < e; i++)
+    {
+        cin >> u >> v >> w;
+        adj[u].push_back({v, w});
+        adj[v].push_back({u, w});
+    }
+    vector<pair<int, pair<int, int>>> ans = calculatePrimsMST(n, adj);
+    int weight = 0;
+    cout << "Edges in the min spanning tree: \n";
+    for (auto it : ans)
+    {
+        weight += it.first;
+        cout << it.second.first << " " << it.second.second << " " << it.first << endl;
+    }
+    cout << "Sum of weights : " << weight;
 }
