@@ -15,6 +15,7 @@ void insert(int ans[], int x, int s)
             return;
     }
 }
+
 void getParent(int ans[])
 {
     cout << ans[1] << " ";

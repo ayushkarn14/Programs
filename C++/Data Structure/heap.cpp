@@ -53,12 +53,12 @@ public:
         {
             int l_child_ind = 2 * i;
             int r_child_ind = 2 * i + 1;
-            if (l_child_ind < size && arr[i].p < arr[l_child_ind].p)
+            if (l_child_ind < size && arr[i].p < arr[l_child_ind].p && arr[l_child_ind].p > arr[r_child_ind].p)
             {
                 swap(arr[i], arr[l_child_ind]);
                 i = l_child_ind;
             }
-            else if (r_child_ind < size && arr[i].p < arr[r_child_ind].p)
+            else if (r_child_ind < size && arr[i].p < arr[r_child_ind].p && arr[l_child_ind].p < arr[r_child_ind].p)
             {
                 swap(arr[i], arr[r_child_ind]);
                 i = r_child_ind;
@@ -80,14 +80,17 @@ public:
 int main()
 {
     heap h;
-    h.insert(20, 2);
-    h.insert(1, 1);
+    h.insert(3, 3);
     h.insert(4, 4);
     h.insert(7, 7);
-    h.insert(16, 16);
-    h.insert(23, 23);
-    h.insert(12, 12);
-    h.insert(2, 20);
-    // h.delete_root();
-    h.display();
+    h.insert(5, 5);
+    h.insert(6, 6);
+    h.insert(8, 8);
+    h.insert(9, 9);
+    for (int i = 0; i < 7; i++)
+    {
+        h.delete_root();
+        h.display();
+        cout << endl;
+    }
 }
