@@ -20,7 +20,7 @@
 
     button {
       width: 300px;
-      margin: 10px;
+      margin: 5px;
       height: 50px;
       font-family: "Open Sans", sans-serif;
       font-size: 16px;
@@ -36,6 +36,7 @@
       user-select: none;
       -webkit-user-select: none;
       touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
     button:active {
@@ -52,13 +53,19 @@
 
     * {
       font-size: large;
+      -webkit-user-select: none;
+      /* Safari */
+      -ms-user-select: none;
+      /* IE 10 and IE 11 */
+      user-select: none;
+      /* Standard syntax */
     }
 
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 50px;
+      margin-top: 20px;
     }
 
     input[type="text"] {
@@ -81,12 +88,28 @@
   <div class="container">
     <input type="text" id="wordInput">
     <button onclick="decrementLetters()">Decrement</button>
-    <button onclick="swapLetters()">Swap</button>
     <button onclick="incrementLetters()">Increment</button>
+    <button onclick="swapLetters()">Swap Position</button>
+    <button onclick="inverse()">Inverse</button>
     <button onclick="copyText()">Copy</button>
   </div>
 
   <script>
+    function inverse() {
+      var word = document.getElementById("wordInput").value;
+      var result = "";
+      for (var i = 0; i < word.length; i++) {
+        var charCode = word.charCodeAt(i);
+        if (charCode <= 122 && charCode >= 97) {
+          charCode = 97 + 25 - (charCode - 97);
+        }
+        else if (charCode <= 90 && charCode >= 65) {
+          charCode = 65 + 25 - (charCode - 65);
+        }
+        result += String.fromCharCode(charCode);
+      }
+      document.getElementById("wordInput").value = result;
+    }
     function decrementLetters() {
       var word = document.getElementById("wordInput").value;
       var result = "";
