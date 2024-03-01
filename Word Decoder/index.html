@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Decoder</title>
+  <style>
+    body {
+      background-color: rgb(46, 46, 46);
+    }
+
+    h1 {
+      font-family: "Open Sans";
+      color: rgb(255, 254, 242);
+      text-align: center;
+      font-size: 40px;
+      margin: 0;
+    }
+
+    button {
+      width: 300px;
+      margin: 10px;
+      height: 50px;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: #000;
+      cursor: pointer;
+      border: 3px solid;
+      padding: 0.25em 0.5em;
+      box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    button:active {
+      box-shadow: 0px 0px 0px 0px;
+      top: 5px;
+      left: 5px;
+    }
+
+    @media (min-width: 768px) {
+      button {
+        padding: 0.25em 0.75em;
+      }
+    }
+
+    * {
+      font-size: large;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    /* button {
+      width: 300px;
+      padding: 10px;
+      margin-bottom: 10px;
+    } */
+  </style>
+</head>
+
+<body>
+  <h1>Word decoder</h1>
+  <div class="container">
+    <input type="text" id="wordInput">
+    <button onclick="decrementLetters()">Decrement</button>
+    <button onclick="swapLetters()">Swap</button>
+    <button onclick="incrementLetters()">Increment</button>
+    <button onclick="copyText()">Copy</button>
+  </div>
+
+  <script>
+    function decrementLetters() {
+      var word = document.getElementById("wordInput").value;
+      var result = "";
+      for (var i = 0; i < word.length; i++) {
+        var charCode = word.charCodeAt(i);
+        if (charCode === 65) { // 'A'
+          charCode = 90; // 'Z'
+        } else if (charCode === 97) { // 'a'
+          charCode = 122; // 'z'
+        } else {
+          charCode--;
+        }
+        result += String.fromCharCode(charCode);
+      }
+      document.getElementById("wordInput").value = result;
+    }
+
+    function swapLetters() {
+      var word = document.getElementById("wordInput").value;
+      var result = "";
+      for (var i = word.length - 1; i >= 0; i--) {
+        result += word[i];
+      }
+      document.getElementById("wordInput").value = result;
+    }
+
+    function incrementLetters() {
+      var word = document.getElementById("wordInput").value;
+      var result = "";
+      for (var i = 0; i < word.length; i++) {
+        var charCode = word.charCodeAt(i);
+        if (charCode === 90) { // 'Z'
+          charCode = 65; // 'A'
+        } else if (charCode === 122) { // 'z'
+          charCode = 97; // 'a'
+        } else {
+          charCode++;
+        }
+        result += String.fromCharCode(charCode);
+      }
+      document.getElementById("wordInput").value = result;
+    }
+
+    function copyText() {
+      var wordInput = document.getElementById("wordInput");
+      wordInput.select();
+      wordInput.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+    }
+  </script>
+</body>
+
+</html>
