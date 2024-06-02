@@ -1,4 +1,3 @@
-
 move(0,_,_,_).
 move(1,A,_,C):- inform(A,C),!. % base condition
 move(N,A,B,C):- M is N-1,
