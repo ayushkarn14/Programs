@@ -1,52 +1,71 @@
 #include <bits/stdc++.h>
 using namespace std;
-void countSort(int *a, int n, int place)
+int max_digits(int *arr, int n)
 {
-    int freq[10] = {0};
-
-    for (int i = 0; i < n; i++)
-        freq[(int)((a[i] / int(pow(10, place))) % 10)]++;
-
-    for (int i = 1; i <= 9; i++)
-        freq[i] += freq[i - 1];
-
-    int res[n];
-
-    for (int i = n - 1; i >= 0; i--)
-        res[--freq[int((a[i] / int(pow(10, place))) % 10)]] = a[i];
-
-    for (int i = 0; i < n; i++)
-        a[i] = res[i];
+    int max = arr[0];
+    for (int i = 1; i < n; i++)
+    {
+        if (max < arr[i])
+            max = arr[i];
+    }
+    int c = 0;
+    while (max > 0)
+    {
+        c++;
+        max /= 10;
+    }
+    return c;
 }
-void radixSort(int *a, int n)
+int *countSort(int *arr, int n, int j)
 {
-    int maxi = a[0];
+    int f[10];
+    for (int i = 0; i < 9; i++)
+        f[i] = 0;
     for (int i = 0; i < n; i++)
-        maxi = max(maxi, a[i]);
-
-    int d = 0;
-    while (maxi > 0)
     {
-        d++;
-        maxi /= 10;
+        int p = pow(10, j);
+        int q = pow(10, j - 1);
+        f[(arr[i] % p) / (q)]++;
     }
-
-    for (int i = 1; i <= d; i++)
-    {
-        countSort(a, n, i);
-    }
-
+    int d[n];
     for (int i = 0; i < n; i++)
-        cout << a[i] << " ";
+    {
+        int p = pow(10, j);
+        int q = pow(10, j - 1);
+        d[i] = (arr[i] % p) / (q);
+    }
+    for (int i = 1; i < 10; i++)
+    {
+        f[i] += f[i - 1];
+    }
+    int *ans = new int[n];
+    for (int i = n - 1; i >= 0; i--)
+    {
+        int k = d[i];
+        int l = arr[i];
+        f[k]--;
+        ans[f[k]] = l;
+    }
+    return ans;
 }
 int main()
 {
-    cout << "Enter number of elements :";
+    cout << "Enter value of n: ";
     int n;
     cin >> n;
-    int a[n];
-    cout << "Enter elements: ";
+    int *arr = new int[n];
+    cout << "Enter values: \n";
     for (int i = 0; i < n; i++)
-        cin >> a[i];
-    radixSort(a, n);
+        cin >> arr[i];
+    int *out = new int[n];
+    int d = max_digits(arr, n);
+    for (int i = 1; i <= d; i++)
+    {
+        out = countSort(arr, n, i);
+    }
+    // delete[] arr;
+    arr = out;
+    // delete[] out;
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
 }
