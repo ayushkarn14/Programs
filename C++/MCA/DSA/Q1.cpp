@@ -1,5 +1,14 @@
 #include <iostream>
 using namespace std;
+void initialize(int arr[], int n, int &top)
+{
+    cout << "Enter " << n << " elements: ";
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+    top = n - 1;
+}
 void traverse(int arr[], int top)
 {
     cout << "Array : ";
@@ -97,7 +106,9 @@ int main()
     int arr[n];
     int s;
     int top = -1;
-    // bool flag = 1;
+
+    initialize(arr, n, top);
+
     do
     {
         cout << "Enter:" << endl;
@@ -128,6 +139,7 @@ int main()
             }
             else if (opt == 3)
                 insert(arr, top + 1, top, n);
+            traverse(arr, top);
             break;
         case 3:
             cout << "1. Begining \n2. Location \n3. End" << endl;
@@ -142,8 +154,10 @@ int main()
             }
             else if (opt == 3)
                 deletion(arr, top, top);
+            traverse(arr, top);
             break;
         case 4:
+
             cout << "Enter element to be searched: ";
             cin >> ele;
             ind = linear_search(arr, top, ele);
@@ -155,6 +169,9 @@ int main()
         case 5:
             cout << "Enter element to be searched: ";
             cin >> ele;
+            insertion_sort(arr, top);
+            cout << "Sorted ";
+            traverse(arr, top);
             ind = binary_search(arr, 0, top, ele);
             if (ind == -1)
                 cout << "Not found" << endl;
@@ -163,6 +180,7 @@ int main()
             break;
         case 6:
             insertion_sort(arr, top);
+            traverse(arr, top);
             break;
         default:
             cout << "No array operation selected";
