@@ -46,6 +46,7 @@ int main()
             cin >> mat[i][j];
         }
     }
+    cout << "Input Matrix:\n";
     for (int i = 0; i < row; i++)
     {
         for (int j = 0; j < col; j++)
@@ -63,15 +64,22 @@ int main()
                 noz++;
         }
     }
-    cout << "Non zero elements = " << noz << " threshold = " << (row * col) / 4 << endl;
-    if (noz >= (row * col) / 4)
+    cout << "Non zero elements = " << noz << " threshold = " << (row * col) / 4.0 << endl;
+    if (noz >= (row * col) / 4.0)
         cout << "Can't make a sparse array as its not a sparse matrix";
     else
     {
         int **arr = matToArr(mat, row, col, noz);
+        cout << "Sparse Array :\n";
         for (int i = 0; i < noz + 1; i++)
         {
             cout << arr[i][0] << "\t" << arr[i][1] << "\t" << arr[i][2] << endl;
         }
+        for (int i = 0; i < noz + 1; i++)
+            delete[] arr[i];
+        delete[] arr;
     }
+    for (int i = 0; i < row; i++)
+        delete[] mat[i];
+    delete[] mat;
 }

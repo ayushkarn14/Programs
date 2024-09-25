@@ -105,9 +105,9 @@ public:
         return out;
     }
 };
-// int main()
-// {
-//     Array1D a(2);
-//     a[1]=2;
-//     cout<<a[1];
-// }
+int main()
+{
+    Array1D a(2);
+    a[1] = 2;
+    cout << a[1];
+}
