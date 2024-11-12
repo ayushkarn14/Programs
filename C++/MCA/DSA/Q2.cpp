@@ -1,10 +1,13 @@
 #include <iostream>
 using namespace std;
-int **matToArr(int **mat, int row, int col, int noz)
+
+#define MAX_DIM 50
+void matToArr(int mat[][MAX_DIM], int row, int col, int noz)
 {
-    int **arr = new int *[noz + 1];
-    for (int i = 0; i < noz + 1; i++)
-        arr[i] = new int[3];
+    // int **arr = new int *[noz + 1];
+    int arr[noz + 1][3];
+    // for (int i = 0; i < noz + 1; i++)
+    //     arr[i] = new int[3];
 
     arr[0][0] = row;
     arr[0][1] = col;
@@ -23,7 +26,12 @@ int **matToArr(int **mat, int row, int col, int noz)
             }
         }
     }
-    return arr;
+    cout << "Sparse array:" << endl;
+    for (int i = 0; i < noz + 1; i++)
+    {
+        cout << arr[i][0] << "\t" << arr[i][1] << "\t" << arr[i][2] << endl;
+    }
+    // return arr;
 }
 int main()
 {
@@ -32,12 +40,12 @@ int main()
     cin >> row;
     cout << "Enter no. of cols:";
     cin >> col;
-    // int mat[row][col];
-    int **mat = new int *[row];
-    for (int i = 0; i < row; i++)
-    {
-        mat[i] = new int[col];
-    }
+    int mat[row][MAX_DIM];
+    // int **mat = new int *[row];
+    // for (int i = 0; i < row; i++)
+    // {
+    //     mat[i] = new int[col];
+    // }
     cout << "Enter " << row * col << " elements:\n";
     for (int i = 0; i < row; i++)
     {
@@ -65,21 +73,10 @@ int main()
         }
     }
     cout << "Non zero elements = " << noz << " threshold = " << (row * col) / 4.0 << endl;
-    if (noz >= (row * col) / 4.0)
+    if (noz <= (row * col) / 4.0)
         cout << "Can't make a sparse array as its not a sparse matrix";
     else
     {
-        int **arr = matToArr(mat, row, col, noz);
-        cout << "Sparse Array :\n";
-        for (int i = 0; i < noz + 1; i++)
-        {
-            cout << arr[i][0] << "\t" << arr[i][1] << "\t" << arr[i][2] << endl;
-        }
-        for (int i = 0; i < noz + 1; i++)
-            delete[] arr[i];
-        delete[] arr;
+        matToArr(mat, row, col, noz);
     }
-    for (int i = 0; i < row; i++)
-        delete[] mat[i];
-    delete[] mat;
 }

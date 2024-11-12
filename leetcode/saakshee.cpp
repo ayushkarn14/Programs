@@ -48,19 +48,36 @@ void display(int *stack)
 
 int main()
 {
-    push(stack);
-    push(stack);
-    push(stack);
-    display(stack);
-    pop(stack);
-    display(stack);
-    pop(stack);
-    pop(stack);
-    pop(stack);
-    for (int i = 0; i < 100; i++)
+    int choice;
+
+    while (1)
     {
-        push(stack);
-        scanf("%d", &stack[top]);
+        printf("Stack Operations:\n");
+        printf("1. Push\n");
+        printf("2. Pop\n");
+        printf("3. Display\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            push(stack);
+            break;
+        case 2:
+            pop(stack);
+            break;
+        case 3:
+            display(stack);
+            break;
+        case 4:
+            printf("Exiting...\n");
+            return 0;
+        default:
+            printf("Invalid choice. Please try again.\n");
+        }
     }
+
     return 0;
 }

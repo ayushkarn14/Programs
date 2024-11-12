@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
-class Node
+
+struct Node
 {
 public:
     int data;
@@ -11,174 +12,176 @@ public:
         next = nullptr;
     }
 };
-class Sll
+
+void traverse(Node *head)
 {
-public:
-    Node *head;
-    Sll()
+    if (head == nullptr)
+        cout << "List is empty\n";
+    else
     {
+        Node *temp = head;
+        while (temp != nullptr)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+}
+
+int count(Node *head)
+{
+    if (head == nullptr)
+        return 0;
+    else
+    {
+        int c = 0;
+        Node *temp = head;
+        while (temp != nullptr)
+        {
+            c++;
+            temp = temp->next;
+        }
+        return c;
+    }
+}
+
+void insertAtHead(Node *&head, int x)
+{
+    Node *t = new Node(x);
+    if (head == nullptr)
+        head = t;
+    else
+    {
+        t->next = head;
+        head = t;
+    }
+}
+
+void insertAtTail(Node *&head, int x)
+{
+    Node *t = new Node(x);
+    if (head == nullptr)
+        head = t;
+    else
+    {
+        Node *temp = head;
+        while (temp->next != nullptr)
+            temp = temp->next;
+        temp->next = t;
+    }
+}
+
+void insertAfter(Node *&head, int x, int aft)
+{
+    Node *t = new Node(x);
+    Node *temp = head;
+    while (temp != nullptr && temp->data != aft)
+        temp = temp->next;
+    if (temp != nullptr && temp->data == aft)
+    {
+        t->next = temp->next;
+        temp->next = t;
+    }
+    else
+    {
+        cout << aft << " not present in the list\n";
+    }
+}
+
+void deleteHead(Node *&head)
+{
+    if (head == nullptr)
+        cout << "List is empty\n";
+    else
+    {
+        Node *to_del = head;
+        head = head->next;
+        delete to_del;
+    }
+}
+
+void deleteTail(Node *&head)
+{
+    if (head == nullptr)
+        cout << "List is empty\n";
+    else if (head->next == nullptr)
+    {
+        delete head;
         head = nullptr;
     }
-    void traverse()
+    else
     {
-        if (head == nullptr)
-            cout << "List is empty\n";
-        else
-        {
-
-            Node *temp = head;
-            while (temp != nullptr)
-            {
-                cout << temp->data << " ";
-                temp = temp->next;
-            }
-            cout << endl;
-        }
-    }
-    int count()
-    {
-        if (head == nullptr)
-            return 0;
-        else
-        {
-            int c = 0;
-            Node *temp = head;
-            while (temp != nullptr)
-            {
-                c++;
-                temp = temp->next;
-            }
-            return c;
-        }
-    }
-    void insertAtHead(int x)
-    {
-        Node *t = new Node(x);
-        if (head == nullptr)
-            head = t;
-        else
-        {
-            t->next = head;
-            head = t;
-        }
-    }
-    void insertAtTail(int x)
-    {
-        Node *t = new Node(x);
-        if (head == nullptr)
-            head = t;
-        else
-        {
-            Node *temp = head;
-            while (temp->next != nullptr)
-                temp = temp->next;
-            temp->next = t;
-        }
-    }
-    void insertAfter(int x, int aft)
-    {
-        Node *t = new Node(x);
+        Node *tp = nullptr;
         Node *temp = head;
-        while (temp->data != aft && temp->next != nullptr)
+        while (temp->next != nullptr)
+        {
+            tp = temp;
             temp = temp->next;
-        if (temp->data == aft)
-        {
-            t->next = temp->next;
-            temp->next = t;
         }
-        else
-        {
-            cout << aft << " not present in the list\n";
-        }
+        tp->next = nullptr;
+        delete temp;
     }
-    void deleteHead()
+}
+
+void deleteElement(Node *&head, int x)
+{
+    if (head == nullptr)
+        cout << "List is empty\n";
+    else
     {
-        if (head == nullptr)
-            cout << "List is empty\n";
+        Node *tp = nullptr;
+        Node *temp = head;
+        while (temp != nullptr && temp->data != x)
+        {
+            tp = temp;
+            temp = temp->next;
+        }
+        if (temp == nullptr)
+            cout << "Invalid value\n";
         else
         {
-            Node *to_del = head;
-            head = head->next;
-            delete to_del;
-        }
-    }
-    void deleteTail()
-    {
-        if (head == nullptr)
-            cout << "List is empty\n";
-        else if (head->next == nullptr)
-        {
-            delete head;
-            head = nullptr;
-        }
-        else
-        {
-            Node *tp = nullptr;
-            Node *temp = head;
-            while (temp->next != nullptr)
-            {
-                tp = temp;
-                temp = temp->next;
-            }
-            tp->next = nullptr;
+            if (tp == nullptr)
+                head = head->next;
+            else
+                tp->next = temp->next;
             delete temp;
         }
     }
-    void deleteElement(int x)
+}
+
+void reverse(Node *&head)
+{
+    Node *curr = head;
+    Node *prev = nullptr;
+    Node *save;
+    while (curr != nullptr)
     {
-        if (head == nullptr)
-            cout << "List is empty\n";
-        else
-        {
-            Node *tp = nullptr;
-            Node *temp = head;
-            while (temp != nullptr && temp->data != x)
-            {
-                tp = temp;
-                temp = temp->next;
-            }
-            if (temp == nullptr)
-                cout << "Invalid value\n";
-            else
-            {
-                if (tp == nullptr)
-                    head = head->next;
-                else
-                    tp->next = temp->next;
-                delete temp;
-            }
-        }
+        save = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = save;
     }
-    void reverse()
-    {
-        Node *curr = head;
-        Node *prev = nullptr;
-        Node *save;
-        while (curr != nullptr)
-        {
-            save = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = save;
-        }
-        head = prev;
-    }
-};
+    head = prev;
+}
+
 int main()
 {
     int outerSwitch;
     char innerSwitch;
-    Sll list;
+    Node *head = nullptr;
     int ele, aft;
+
     do
     {
-        cout << "Enter:";
-        cout << "1:Insert\t";
-        cout << "2:Delete\t";
-        cout << "3:Count Elements\t";
-        cout << "4:Reverse\t";
-        cout << "-1:Terminate\n";
+        cout << "Enter:\n";
+        cout << "1: Insert\t";
+        cout << "2: Delete\t";
+        cout << "3: Count Elements\t";
+        cout << "4: Reverse\t";
+        cout << "-1: Terminate\n";
         cin >> outerSwitch;
+
         switch (outerSwitch)
         {
         case 1:
@@ -189,26 +192,23 @@ int main()
             case 'a':
                 cout << "Enter element to insert: ";
                 cin >> ele;
-                list.insertAtHead(ele);
-                list.traverse();
+                insertAtHead(head, ele);
+                traverse(head);
                 break;
-
             case 'b':
                 cout << "Enter element to insert: ";
                 cin >> ele;
-                list.insertAtTail(ele);
-                list.traverse();
+                insertAtTail(head, ele);
+                traverse(head);
                 break;
-
             case 'c':
                 cout << "Enter element to insert: ";
                 cin >> ele;
                 cout << "Enter element after which to insert: ";
                 cin >> aft;
-                list.insertAfter(ele, aft);
-                list.traverse();
+                insertAfter(head, ele, aft);
+                traverse(head);
                 break;
-
             default:
                 cout << "Choose correct option\n";
                 break;
@@ -220,19 +220,18 @@ int main()
             switch (innerSwitch)
             {
             case 'a':
-                list.deleteHead();
-                list.traverse();
+                deleteHead(head);
+                traverse(head);
                 break;
-
             case 'b':
-                list.deleteTail();
-                list.traverse();
+                deleteTail(head);
+                traverse(head);
                 break;
             case 'c':
-                cout << "Enter element to delete : ";
+                cout << "Enter element to delete: ";
                 cin >> ele;
-                list.deleteElement(ele);
-                list.traverse();
+                deleteElement(head, ele);
+                traverse(head);
                 break;
             default:
                 cout << "Choose correct option\n";
@@ -240,15 +239,19 @@ int main()
             }
             break;
         case 3:
-            cout << "No. of elements : " << list.count() << endl;
+            cout << "No. of elements: " << count(head) << endl;
             break;
         case 4:
             cout << "List has been reversed\n";
-            list.reverse();
-            list.traverse();
+            reverse(head);
+            traverse(head);
+            break;
+        case -1:
+            cout << "Terminating program.\n";
             break;
         default:
             cout << "Choose correct option\n";
+            break;
         }
     } while (outerSwitch != -1);
 }
