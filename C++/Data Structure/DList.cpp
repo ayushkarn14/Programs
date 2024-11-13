@@ -98,6 +98,26 @@ public:
         this->trailer = ob.trailer;
         delete temp;
     }
+    void reverse()
+    {
+        if (header->next == trailer || header->next->next == trailer)
+            return;
+        DNode *curr = header->next;
+        DNode *save = NULL;
+        while (curr != trailer)
+        {
+            save = curr->next;
+            curr->next = curr->prev;
+            curr->prev = save;
+            curr = save;
+        }
+        DNode *head = header->next;
+        DNode *tail = trailer->prev;
+        head->next = trailer;
+        trailer->prev = head;
+        tail->prev = header;
+        header->next = tail;
+    }
     void swap(DNode *x, DNode *y)
     {
 
@@ -129,5 +149,7 @@ int main()
     l1.display();
 
     l1.swap(l1.header->next->next, l1.header->next->next->next->next);
+    l1.display();
+    l1.reverse();
     l1.display();
 }
