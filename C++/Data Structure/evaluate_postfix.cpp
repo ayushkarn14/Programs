@@ -91,7 +91,7 @@ int evaluatepostfix(string s)
 }
 int main()
 {
-    int ans = evaluatepostfix(infixtopostfix("53+62/*35*+"));
+    int ans = evaluatepostfix(infixtopostfix("1+5/2"));
     cout << "Ans = " << ans << endl;
 
     return 0;
