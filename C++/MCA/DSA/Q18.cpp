@@ -13,7 +13,7 @@ string lcs(string a, string b)
         {
             if (i == 0 || j == 0)
                 dp[i][j] = 0;
-            else if (a[i - 1] == b[i - 1])
+            else if (a[i - 1] == b[j - 1])
                 dp[i][j] = dp[i - 1][j - 1] + 1;
             else
                 dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
