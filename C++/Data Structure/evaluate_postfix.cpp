@@ -91,8 +91,10 @@ int evaluatepostfix(string s)
 }
 int main()
 {
-    int ans = evaluatepostfix(infixtopostfix("1+5/2"));
+    cout << "Enter infix string : ";
+    string in;
+    cin >> in;
+    int ans = evaluatepostfix(infixtopostfix(in));
     cout << "Ans = " << ans << endl;
-
     return 0;
 }
