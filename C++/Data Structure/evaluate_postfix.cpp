@@ -10,6 +10,8 @@ int pre(char a)
 }
 string infixtopostfix(string s)
 {
+    if (s.length() == 0)
+        return s;
     stack<char> st;
     string expression = "";
     for (int i = 0; i < s.length(); i++)
@@ -91,10 +93,37 @@ int evaluatepostfix(string s)
 }
 int main()
 {
-    cout << "Enter infix string : ";
-    string in;
-    cin >> in;
-    int ans = evaluatepostfix(infixtopostfix(in));
-    cout << "Ans = " << ans << endl;
+    vector<string> test_cases = {
+        "",           // Empty input
+        "5",          // Single operand
+        "3+2",        // Single operator with two operands
+        "3+2*4-1",    // Complex expression with multiple operators
+        "(3+2)*4",    // Expression with parentheses
+        "999999999+1" // Large numbers
+    };
+
+    for (const string &test_case : test_cases)
+    {
+        cout << "Testing with input: " << test_case << endl;
+        if (test_case.empty())
+        {
+            cout << "Error: Empty input" << endl;
+        }
+        else
+        {
+            try
+            {
+                string postfix = infixtopostfix(test_case);
+                int ans = evaluatepostfix(postfix);
+                cout << "Ans = " << ans << endl;
+            }
+            catch (const exception &e)
+            {
+                cout << "Error: " << e.what() << endl;
+            }
+        }
+        cout << "------------------------" << endl;
+    }
+
     return 0;
 }
